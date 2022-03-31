@@ -1,0 +1,5 @@
+npm install express
+npm install dotenv 
+npm install mongoosoe
+npm install jsonwebtoken
+npm install bcrypt
