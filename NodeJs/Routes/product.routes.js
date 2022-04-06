@@ -6,6 +6,7 @@ const {upload}=require('../Controllers/fileUploadHelper');
 
 
 router.post('/add',auth.isLoggedIn,upload.single('file'),productController.insertProduct);
+router.get('/items/:ptype',auth.isLoggedIn,productController.findPizzaByType);
 router.post('/singleFile',upload.single('file'),productController.singleFileUpload);
 
 

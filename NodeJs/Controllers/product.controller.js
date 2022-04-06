@@ -58,3 +58,22 @@ exports.insertProduct=async(req,res)=>{
        }
   }
   
+  exports.findPizzaByType=async(req,res)=>{
+    let ptype=req.params.ptype;
+    console.log(ptype);
+   try{
+       const result=await productModel.find({ptype:ptype,isDeleted:false},{password:0,isAdmin:0,_id:0})
+        if(!result)
+            return res.status(204).json(result);
+        else
+            return res.status(200).json(result);
+  
+      }
+   catch(error)
+     {
+        console.error("Error in find Pizza Product");
+        return res.status(500).json({'error':true});
+     }
+     
+    
+}
