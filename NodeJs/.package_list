@@ -3,3 +3,5 @@ npm install dotenv
 npm install mongoosoe
 npm install jsonwebtoken
 npm install bcrypt
+npm install cors
+npm install express-fileupload

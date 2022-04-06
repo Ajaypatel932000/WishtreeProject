@@ -7,7 +7,8 @@ exports.insertUser=async(req,res)=>{
       const user=await userModel.findOne({email:req.body.email})
       if(user)
        {
-         return res.status(409).json({'inserted':false});
+         return res.status(500).json({'inserted':false});
+
        }
 
        //const userInsert=new userModel(req.body);
@@ -20,7 +21,8 @@ exports.insertUser=async(req,res)=>{
      } 
   catch(error)
      {
-       return  res.status(400).json({'inserted':false});
+       console.log(error);
+       return  res.status(500).json({'inserted':false});
      }
 }
 
@@ -129,7 +131,9 @@ exports.login=async(req,res,next)=>{
                 }else
                 {
                        let token=user.createToken();
-                       res.json({token,user});   
+
+                        res.json({token,'loggedIn':true,isAdmin:user.isAdmin});
+                      // res.json({token,user});   
                     //res.send('Login Successfully');
                 }
             })

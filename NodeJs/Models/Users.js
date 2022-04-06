@@ -11,7 +11,7 @@ const userSchema=new Schema({
     email:{type:String,required:true,unique:true},
     gender:{type:String,required:true},
     password:{type:String,required:true},
-    isAdmin:{type:String,required:true,default:false}
+    isAdmin:{type:Boolean,required:true,default:false}
 
 })
 
@@ -53,6 +53,7 @@ userSchema.methods.createToken=function(){
         return token;
 
     }catch(error){
+        console.log("Token error called.")
         return error
     }
 }
