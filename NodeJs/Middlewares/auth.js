@@ -43,7 +43,7 @@ module.exports={
              }
              catch(tokenError)
              {
-                 console.log("invalid token  error"+tokenError.name);
+                 console.log("invalid token  error");
                 return res.status(500).json({'isLoggedIn':false});
 
              }

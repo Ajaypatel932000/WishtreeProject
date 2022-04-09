@@ -29,15 +29,18 @@ exports.insertUser=async(req,res)=>{
 exports.findAllUser=async(req,res)=>{
 
   try{  
-       const result=await userModel.find({isAdmin:false},{_id:0,isAdmin:0,password:0}).sort({'fname':1});
+    const result=await userModel.find({isAdmin:false},{password:0,isAdmin:0}).sort({fname:1})
+    console.log(result);
+       
        if(!result)
            return res.status(204).json({'users':result});
        else
            return res.status(200).json({'users':result});
 
+
      }catch(error)
      {
-       //console.error('error done  ')
+       console.error('error done  ',error)
       return res.status(500).json({'error':true});
       
      }
@@ -64,16 +67,18 @@ exports.findOne=async(req,res)=>{
 }
 exports.updateUserById=async(req,res)=>{
 
-    let id=req.params.id;
+    // let id=req.params.id;
+    console.log("update user by id",req.body);
+
    try{
-        const result=await userModel.findById({_id:id},{password:0,isAdmin:0})
+        const result=await userModel.findById({_id:req.body._id},{password:0,isAdmin:0})
         if(!result)
           return  res.status(200).json({'updated':false})
         else
          {
             result.fname=req.body.fname;
             result.lname=req.body.lname;
-            result.gender=req.body.gender;
+            // result.gender=req.body.gender;
             result.mobile_no=req.body.mobile_no;
             result.email=req.body.email;
         
@@ -105,7 +110,7 @@ exports.deleteUserById=async(req,res)=>{
       }
     catch(error)
     {
-        console.log(error);
+        console.log("error in deleteUserById");
         return res.status(400).json({'deleted':false});
     }
     
